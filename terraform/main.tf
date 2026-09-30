@@ -68,3 +68,29 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+
+
+resource "aws_lambda_function" "report_generator" {
+  function_name = "serverless-ops-report-generator"
+
+  filename         = "${path.module}/../lambda/lambda_function.zip"
+  source_code_hash = filebase64sha256("${path.module}/../lambda/lambda_function.zip")
+
+  role    = aws_iam_role.lambda_role.arn
+  handler = "report_generator.lambda_handler"
+  runtime = "python3.10"
+
+  timeout     = 30
+  memory_size = 128
+
+  environment {
+    variables = {
+      S3_BUCKET = aws_s3_bucket.reports.bucket
+    }
+  }
+
+  tags = {
+    Project     = "serverless-ops-reporting"
+    Environment = "dev"
+  }
+}

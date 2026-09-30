@@ -10,6 +10,8 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+lambda/package/
+lambda/lambda_function.zip
 
 # Environment / secrets
 .env
