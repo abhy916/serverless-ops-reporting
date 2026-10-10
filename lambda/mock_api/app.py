@@ -1,0 +1,40 @@
+import json
+
+
+def lambda_handler(event, context):
+    incidents = [
+        {
+            "number": "INC0001001",
+            "short_description": "Application login failure",
+            "priority": "1",
+            "state": "Open",
+            "assignment_group": "Application Support",
+            "created_at": "2026-09-22T08:15:00Z"
+        },
+        {
+            "number": "INC0001002",
+            "short_description": "Database connection timeout",
+            "priority": "2",
+            "state": "In Progress",
+            "assignment_group": "Database Team",
+            "created_at": "2026-09-22T09:30:00Z"
+        },
+        {
+            "number": "INC0001003",
+            "short_description": "User access request",
+            "priority": "4",
+            "state": "Resolved",
+            "assignment_group": "Service Desk",
+            "created_at": "2026-09-22T10:45:00Z"
+        }
+    ]
+
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": json.dumps({
+            "result": incidents
+        })
+    }

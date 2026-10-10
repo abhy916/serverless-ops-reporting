@@ -12,6 +12,7 @@ __pycache__/
 venv/
 lambda/package/
 lambda/lambda_function.zip
+lambda/mock_api/mock_api.zip
 
 # Environment / secrets
 .env
